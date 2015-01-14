@@ -11,7 +11,7 @@ before_script:
   - git config --global user.name "Alxandr (via TravisCI)"
   - npm version patch
 
-script: npm publish
+script: mimosa build
 
 deploy:
   provider: npm
