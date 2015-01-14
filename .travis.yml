@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+- '0.11'
+- '0.10'
+
+before_script:
+  - npm install mimosa -g
+  - npm version patch
+
+script: npm publish
+
+deploy:
+  provider: npm
+  email: alxandr@alxandr.me
+  api_key:
+    secure: SkjuauBo5wn+QMrfdnWbjGCl6rxKkIH8G37mg6O2gYVSm30c6yaN44IL5JXLB+Jm+0WCXZrtcMOuS9TiUq5bJ4bL6pwg1xPppzKjwxpuyXCWR0bswWn0fTcIeSN3RLSRAY2UflNIUR3tJus2xxNGMWlPAzaPM/xG2YgfIzedcik=
+  on:
+    tags: true
+    repo: YoloDev/mimosa-6to5
