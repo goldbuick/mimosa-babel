@@ -21,3 +21,4 @@ deploy:
   on:
     repo: YoloDev/mimosa-6to5
     branch: master
+    node_js: '0.10'
