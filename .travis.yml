@@ -9,7 +9,6 @@ install:
 before_script:
   - git config --global user.email "alxandr@alxandr.me"
   - git config --global user.name "Alxandr (via TravisCI)"
-  - npm version patch
 
 script: mimosa build
 
@@ -19,6 +18,6 @@ deploy:
   api_key:
     secure: SkjuauBo5wn+QMrfdnWbjGCl6rxKkIH8G37mg6O2gYVSm30c6yaN44IL5JXLB+Jm+0WCXZrtcMOuS9TiUq5bJ4bL6pwg1xPppzKjwxpuyXCWR0bswWn0fTcIeSN3RLSRAY2UflNIUR3tJus2xxNGMWlPAzaPM/xG2YgfIzedcik=
   on:
+    tags: true
     repo: YoloDev/mimosa-6to5
-    branch: master
     node_js: '0.10'
