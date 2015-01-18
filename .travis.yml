@@ -5,6 +5,13 @@ node_js:
 
 install:
   - npm install mimosa -g
+  - set ORIG="$PWD"
+  - cd ..
+  - mkdir tmp_inst
+  - cd tmp_inst
+  - npm install mimosa-6to5
+  - mv node_modules $ORIG
+  - cd $ORIG
 
 before_script:
   - git config --global user.email "alxandr@alxandr.me"
