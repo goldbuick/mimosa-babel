@@ -4,7 +4,7 @@ node_js:
 - '0.10'
 
 install:
-  - install.sh
+  - ./install.sh
 
 before_script:
   - git config --global user.email "alxandr@alxandr.me"
