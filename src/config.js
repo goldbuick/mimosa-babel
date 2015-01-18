@@ -1,4 +1,4 @@
-export var defaults = () => {
+export var defaults = () => { return {
   to5: {
   	// File extensions
   	extensions: ['js', 'es6'],
@@ -75,7 +75,7 @@ export var defaults = () => {
       }
     }
   }
-};
+}};
 
 export function placeholder() {
   return `

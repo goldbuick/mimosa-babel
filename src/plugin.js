@@ -4,7 +4,7 @@ let compiler = null;
 
 let typeIsArray = Array.isArray || (value) => ({}.toString.call(value) === '[object Array]');
 
-function _compile(config, file, cb) {
+function _compile(config, file, rootConf, cb) {
   if (compiler === null)
     compiler = require('6to5');
 
@@ -24,14 +24,14 @@ function _compile(config, file, cb) {
     return cb();
   }
 
-  if (file.outputFileText) {
+  if (file.inputFileText) {
     try {
       let fOpts = extend(config.options, {
         filename: file.inputFileName,
         ast: false
       });
 
-      let result = compiler.transform(file.outputFileText, fOpts);
+      let result = compiler.transform(file.inputFileText, fOpts);
       if (result.map !== null && result.map !== undefined) {
         let map = result.map
         // fix paths if Windows style paths
@@ -40,9 +40,10 @@ function _compile(config, file, cb) {
           p.replace(/\\/g, "/"));
       }
 
-      file.outputFileText = result.code
+      cb(null, result.code, rootConf, result.map);
     } catch (err) {
       logger.error(`Error running es6 module transpiler on file [[ ${file.inputFileName} ]]`, err);
+      cb(err);
     }
   }
 }
@@ -75,5 +76,5 @@ export function extensions(conf) {
 
 export function compile(conf, file, cb) {
   logger = conf.log;
-  return _compile(conf.to5, file, cb);
+  return _compile(conf.to5, file, conf, cb);
 }
