@@ -45,6 +45,8 @@ function _compile(config, file, rootConf, cb) {
       logger.error(`Error running es6 module transpiler on file [[ ${file.inputFileName} ]]`, err);
       cb(err);
     }
+  } else {
+    cb();
   }
 }
 

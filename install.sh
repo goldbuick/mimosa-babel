@@ -1,11 +1,13 @@
 #!/bin/bash
+set -o verbose
+set -x
 
 ORIG="$PWD"
 
-npm install mimosa -g
+rm -rf node_modules
 cd ..
-mkdir tmp_inst
-cd tmp_inst
+dir=`mktemp -d` && cd $dir
 npm install mimosa-6to5
 mv node_modules "$ORIG"
 cd "$ORIG"
+rm -rf "$dir"

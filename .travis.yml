@@ -4,6 +4,7 @@ node_js:
 - '0.10'
 
 install:
+  - npm install mimosa -g
   - chmod +x ./install.sh
   - ./install.sh
 
@@ -20,5 +21,4 @@ deploy:
     secure: SkjuauBo5wn+QMrfdnWbjGCl6rxKkIH8G37mg6O2gYVSm30c6yaN44IL5JXLB+Jm+0WCXZrtcMOuS9TiUq5bJ4bL6pwg1xPppzKjwxpuyXCWR0bswWn0fTcIeSN3RLSRAY2UflNIUR3tJus2xxNGMWlPAzaPM/xG2YgfIzedcik=
   on:
     tags: true
-    repo: YoloDev/mimosa-6to5
     node_js: '0.10'
