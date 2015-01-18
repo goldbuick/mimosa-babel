@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/YoloDev/mimosa-6to5",
   "dependencies": {
-    "6to5": "^2.5.0"
+    "6to5": "^2.12.6"
   }
 }
