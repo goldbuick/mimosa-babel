@@ -1,4 +1,4 @@
-export var defaults = {
+export var defaults = () => {
   to5: {
   	// File extensions
   	extensions: ['js', 'es6'],
