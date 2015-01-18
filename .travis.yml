@@ -4,6 +4,7 @@ node_js:
 - '0.10'
 
 install:
+  - chmod +x ./install.sh
   - ./install.sh
 
 before_script:
