@@ -1,4 +1,4 @@
-export { compile, extensions } from './plugin';
+export { compile, getExtensions } from './plugin';
 export { defaults, placeholder, validate } from './config';
 
 export var name = '6to5';
