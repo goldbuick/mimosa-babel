@@ -72,7 +72,7 @@ function extend(object, ...args) {
   return object;
 }
 
-export function getExtensions(conf) {
+export function extensions(conf) {
   return conf.to5.extensions;
 }
 
