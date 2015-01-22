@@ -1,26 +1,17 @@
 let path = require('path');
 let logger = null;
-let compiler = null;
-
-let typeIsArray = Array.isArray || (value) => ({}.toString.call(value) === '[object Array]');
 
 function _compile(config, file, cb) {
-  if (compiler === null)
-    compiler = require('6to5');
-
-  let exclude = config.exclude
-  if (!typeIsArray(exclude))
-    exclude = [exclude];
   //console.log options
 
-  if (isExcluded(exclude, file.inputFileName)) {
+  if (isExcluded(config.exclude, file.inputFileName)) {
     logger.debug(`skipping 6to5 transpiling for [[ ${file.inputFileName} ]], file is excluded`);
     return cb();
   }
 
   if (file.isVendor) {
     logger.debug(`skipping 6to5 transpiling for [[ ${file.inputFileName} ]], is vendor file`);
-    //console.log "skipping es6Modules transpiling for [[ #{file.inputFileName} ]], file is vendor"
+    //console.log "skipping 6to5 transpiling for [[ #{file.inputFileName} ]], is vendor file"
     return cb();
   }
 
@@ -31,7 +22,7 @@ function _compile(config, file, cb) {
         ast: false
       });
 
-      let result = compiler.transform(file.inputFileText, fOpts);
+      let result = config.lib.transform(file.inputFileText, fOpts);
 
       // if source map is inline, need to leave sourceMap null to avoid
       // appending extra source map comment in mimosa core
@@ -57,7 +48,6 @@ function _compile(config, file, cb) {
     cb();
   }
 }
-
 
 function isExcluded(filters, name) {
   return filters.some((filter) => {

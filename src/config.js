@@ -4,7 +4,7 @@ export var defaults = () => { return {
   	extensions: ['js', 'es6'],
 
   	// Exclude files regex
-    exclude: null,
+    exclude: [],
 
     // Compiler options
     options: {
@@ -77,20 +77,25 @@ export var defaults = () => { return {
   }
 }};
 
-export function placeholder() {
-  return `
-  \t
-    rename:                     # Configuration for non-require minification/compression via
-                                # uglify using the --minify flag.
-      map: []                   # List of string paths and regexes to match files to exclude
-                                # when running minification. Any path with ".min." in its name,
-                                # like jquery.min.js, is assumed to already be minified and is
-                                # ignored by default. Paths can be relative to the
-                                # watch.compiledDir, or absolute.  Paths are to compiled files,
-                                # so '.js' rather than '.coffee'
-  `;
-}
+export function validate(config, validators) {
+  let errors = [];
 
-export function validate() {
-  return [];
+  if (validators.ifExistsIsObject(errors, "to5 config", config.to5)) {
+
+    if ( validators.isArrayOfStringsMustExist( errors, "to5.extensions", config.to5.extensions ) ) {
+      if (config.to5.extensions.length === 0) {
+        errors.push( "to5.extensions cannot be an empty array");
+      }
+    }
+
+    validators.ifExistsIsObject(errors, "to5.options", config.to5.options);
+    validators.ifExistsIsArray(errors, "to5.exclude", config.to5.exclude);
+  }
+
+  // if user has not provided their own version, use local 6to5
+  if ( !errors.length && !config.to5.lib ) {
+    config.to5.lib = require( "6to5" );
+  }
+
+  return errors;
 }
