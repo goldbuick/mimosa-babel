@@ -14,12 +14,12 @@ function _compile(config, file, cb) {
   //console.log options
 
   if (isExcluded(exclude, file.inputFileName)) {
-    logger.debug(`skipping es6Modules transpiling for [[ ${file.inputFileName} ]], file is excluded via regex`);
+    logger.debug(`skipping 6to5 transpiling for [[ ${file.inputFileName} ]], file is excluded`);
     return cb();
   }
 
   if (file.isVendor) {
-    logger.debug(`skipping es6Modules transpiling for [[ ${file.inputFileName} ]], file is vendor`);
+    logger.debug(`skipping 6to5 transpiling for [[ ${file.inputFileName} ]], is vendor file`);
     //console.log "skipping es6Modules transpiling for [[ #{file.inputFileName} ]], file is vendor"
     return cb();
   }
