@@ -1,26 +1,17 @@
 let path = require('path');
 let logger = null;
-let compiler = null;
 
-let typeIsArray = Array.isArray || (value) => ({}.toString.call(value) === '[object Array]');
-
-function _compile(config, file, rootConf, cb) {
-  if (compiler === null)
-    compiler = require('6to5');
-
-  let exclude = config.exclude
-  if (!typeIsArray(exclude))
-    exclude = [exclude];
+function _compile(config, file, cb) {
   //console.log options
 
-  if (isExcluded(exclude, file.inputFileName)) {
-    logger.debug(`skipping es6Modules transpiling for [[ ${file.inputFileName} ]], file is excluded via regex`);
+  if (isExcluded(config.exclude, file.inputFileName)) {
+    logger.debug(`skipping 6to5 transpiling for [[ ${file.inputFileName} ]], file is excluded`);
     return cb();
   }
 
   if (file.isVendor) {
-    logger.debug(`skipping es6Modules transpiling for [[ ${file.inputFileName} ]], file is vendor`);
-    //console.log "skipping es6Modules transpiling for [[ #{file.inputFileName} ]], file is vendor"
+    logger.debug(`skipping 6to5 transpiling for [[ ${file.inputFileName} ]], is vendor file`);
+    //console.log "skipping 6to5 transpiling for [[ #{file.inputFileName} ]], is vendor file"
     return cb();
   }
 
@@ -31,16 +22,24 @@ function _compile(config, file, rootConf, cb) {
         ast: false
       });
 
-      let result = compiler.transform(file.inputFileText, fOpts);
-      if (result.map !== null && result.map !== undefined) {
+      let result = config.lib.transform(file.inputFileText, fOpts);
+
+      // if source map is inline, need to leave sourceMap null to avoid
+      // appending extra source map comment in mimosa core
+      // will be managed/detected with future mimosa core release
+      let sourceMap = null;
+      if (result.map !== null
+        && result.map !== undefined
+        && config.options.sourceMap === true) {
         let map = result.map
         // fix paths if Windows style paths
         map.file = map.file.replace(/\\/g, "/");
         map.sources = map.sources.map((p) =>
           p.replace(/\\/g, "/"));
+        sourceMap = JSON.stringify(result.map);
       }
 
-      cb(null, result.code, rootConf, result.map);
+      cb(null, result.code, config, sourceMap);
     } catch (err) {
       logger.error(`Error running es6 module transpiler on file [[ ${file.inputFileName} ]]`, err);
       cb(err);
@@ -49,7 +48,6 @@ function _compile(config, file, rootConf, cb) {
     cb();
   }
 }
-
 
 function isExcluded(filters, name) {
   return filters.some((filter) => {
@@ -78,5 +76,5 @@ export function extensions(conf) {
 
 export function compile(conf, file, cb) {
   logger = conf.log;
-  return _compile(conf.to5, file, conf, cb);
+  return _compile(conf.to5, file, cb);
 }

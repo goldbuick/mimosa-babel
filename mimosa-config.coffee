@@ -7,3 +7,6 @@ exports.config =
   jshint:
     rules:
       node: true
+  to5:
+    options:
+      sourceMap: null
