@@ -1,8 +1,6 @@
 mimosa-6to5
 ===========
 
-## Overview
-
 This is a [6to5](https://6to5.org/) compiler module for the Mimosa build tool. It will compile your ES6 JavaScript to ES5 JavaScript.
 
 For more information regarding Mimosa, see http://mimosa.io
@@ -44,10 +42,10 @@ to5: {
 }
 ```
 
-#### `lib` 6to5 node module
+#### `lib` node module
 You may want to use this module but may not want to use the version of 6to5 that comes bundled. Using the `lib` property you can provide a specific version of 6to5 if the one being used by this module isn't to your liking. To provide a specific version, you must have it npm installed into your project and then provide it to `lib`. For instance: `lib: require('6to5')`.
 
-#### `extensions`: array of strings
+#### `extensions` array of strings
 The extension(s) of your ES6 JavaScript files.
 
 #### `options` object
