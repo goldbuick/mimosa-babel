@@ -9,4 +9,4 @@ exports.config =
       node: true
   to5:
     options:
-      sourceMap: null
+      sourceMap: false
