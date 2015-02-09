@@ -18,7 +18,6 @@ function _compile(config, file, cb) {
 
   if (file.inputFileText) {
     try {
-      debugger;
       let localConfig = config;
       if (localConfig.overrides) {
         for (let pattern in config.overrides) {
