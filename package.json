@@ -1,6 +1,6 @@
 {
   "name": "mimosa-6to5",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "6to5 mimosa files",
   "main": "./lib/index",
   "scripts": {
