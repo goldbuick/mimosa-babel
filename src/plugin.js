@@ -1,4 +1,5 @@
 let path = require('path');
+let deepmerge = require('deepmerge');
 let logger = null;
 
 function _compile(config, file, cb) {
@@ -17,12 +18,27 @@ function _compile(config, file, cb) {
 
   if (file.inputFileText) {
     try {
-      let fOpts = extend(config.options, {
+      debugger;
+      let localConfig = config;
+      if (localConfig.overrides) {
+        for (let pattern in config.overrides) {
+          if (config.overrides.hasOwnProperty(pattern)) {
+            let match = new RegExp(pattern);
+            //console.log(`matching ${pattern} with ${file.inputFileName}: ${match.test(file.inputFileName)}`);
+            if (match.test(file.inputFileName)) {
+              //console.log(`matching ${pattern}, appending config`);
+              localConfig = extend(localConfig, config.overrides[pattern]);
+            }
+          }
+        }
+      }
+
+      let fOpts = extend(localConfig.options, {
         filename: file.inputFileName,
         ast: false
       });
 
-      let result = config.lib.transform(file.inputFileText, fOpts);
+      let result = localConfig.lib.transform(file.inputFileText, fOpts);
 
       // if source map is inline, need to leave sourceMap null to avoid
       // appending extra source map comment in mimosa core
@@ -30,7 +46,7 @@ function _compile(config, file, cb) {
       let sourceMap = null;
       if (result.map !== null
         && result.map !== undefined
-        && config.options.sourceMap === true) {
+        && localConfig.options.sourceMap === true) {
         let map = result.map
         // fix paths if Windows style paths
         map.file = map.file.replace(/\\/g, "/");
@@ -59,12 +75,7 @@ function isExcluded(filters, name) {
 
 function extend(object, ...args) {
   for (let i = 0, l = args.length; i < l; i++) {
-    let arg = args[i];
-    for (let key in arg) {
-      if (arg.hasOwnProperty(key)) {
-        object[key] = arg[key];
-      }
-    }
+    object = deepmerge(object, args[i]);
   }
 
   return object;
