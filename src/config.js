@@ -1,5 +1,5 @@
 export var defaults = () => { return {
-  to5: {
+  babel: {
   	// File extensions
   	extensions: ['js', 'es6'],
 
@@ -9,20 +9,20 @@ export var defaults = () => { return {
     // Compiler options
     options: {
       // List of transformers to EXCLUDE.
-      // Run `6to5 --help` to see a full list of transformers.
+      // Run `babel --help` to see a full list of transformers.
       blacklist: [],
 
       // List of transformers to ONLY use.
-      // Run `6to5 --help` to see a full list of transformers.
+      // Run `babel --help` to see a full list of transformers.
       whitelist: [],
 
       // Module formatter to use
-      // Run `6to5 --help` to see a full list of module formatters.
-      // Default: "common"
+      // Run `babel --help` to see a full list of module formatters.
+      // Default: 'common'
       modules: 'common',
 
       // If truthy, adds a `map` property to returned output.
-      // If set to "inline", a comment with a sourceMappingURL directive is added to
+      // If set to 'inline', a comment with a sourceMappingURL directive is added to
       // the bottom of the returned code.
       // Default: true
       sourceMap: true,
@@ -60,8 +60,8 @@ export var defaults = () => { return {
           adjustMultilineComment: true,
 
           // Indent string
-          // Default: "  "
-          style: "  ",
+          // Default: '  '
+          style: '  ',
 
           // Base indent level
           // Default: 0
@@ -75,21 +75,21 @@ export var defaults = () => { return {
 export function validate(config, validators) {
   let errors = [];
 
-  if (validators.ifExistsIsObject(errors, "to5 config", config.to5)) {
+  if (validators.ifExistsIsObject(errors, 'babel config', config.babel)) {
 
-    if ( validators.isArrayOfStringsMustExist( errors, "to5.extensions", config.to5.extensions ) ) {
-      if (config.to5.extensions.length === 0) {
-        errors.push( "to5.extensions cannot be an empty array");
+    if ( validators.isArrayOfStringsMustExist( errors, 'babel.extensions', config.babel.extensions ) ) {
+      if (config.babel.extensions.length === 0) {
+        errors.push('babel.extensions cannot be an empty array');
       }
     }
 
-    validators.ifExistsIsObject(errors, "to5.options", config.to5.options);
-    validators.ifExistsIsArray(errors, "to5.exclude", config.to5.exclude);
+    validators.ifExistsIsObject(errors, 'babel.options', config.babel.options);
+    validators.ifExistsIsArray(errors, 'babel.exclude', config.babel.exclude);
   }
 
-  // if user has not provided their own version, use local 6to5
-  if ( !errors.length && !config.to5.lib ) {
-    config.to5.lib = require( "6to5" );
+  // if user has not provided their own version, use local babel
+  if ( !errors.length && !config.babel.lib ) {
+    config.babel.lib = require('babel');
   }
 
   return errors;

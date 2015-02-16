@@ -6,13 +6,13 @@ function _compile(config, file, cb) {
   //console.log options
 
   if (isExcluded(config.exclude, file.inputFileName)) {
-    logger.debug(`skipping 6to5 transpiling for [[ ${file.inputFileName} ]], file is excluded`);
+    logger.debug(`skipping babel transpiling for [[ ${file.inputFileName} ]], file is excluded`);
     return cb();
   }
 
   if (file.isVendor) {
-    logger.debug(`skipping 6to5 transpiling for [[ ${file.inputFileName} ]], is vendor file`);
-    //console.log "skipping 6to5 transpiling for [[ #{file.inputFileName} ]], is vendor file"
+    logger.debug(`skipping babel transpiling for [[ ${file.inputFileName} ]], is vendor file`);
+    //console.log "skipping babel transpiling for [[ #{file.inputFileName} ]], is vendor file"
     return cb();
   }
 
@@ -81,10 +81,10 @@ function extend(object, ...args) {
 }
 
 export function extensions(conf) {
-  return conf.to5.extensions;
+  return conf.babel.extensions;
 }
 
 export function compile(conf, file, cb) {
   logger = conf.log;
-  return _compile(conf.to5, file, cb);
+  return _compile(conf.babel, file, cb);
 }
