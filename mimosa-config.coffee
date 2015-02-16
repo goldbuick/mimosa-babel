@@ -1,5 +1,5 @@
 exports.config =
-  modules: ['jshint', '6to5']
+  modules: ['jshint', 'babel']
   watch:
     sourceDir: 'src'
     compiledDir: 'lib'
@@ -7,6 +7,6 @@ exports.config =
   jshint:
     rules:
       node: true
-  to5:
+  babel:
     options:
       sourceMap: false

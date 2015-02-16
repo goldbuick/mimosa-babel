@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/YoloDev/mimosa-babel",
   "dependencies": {
-    "bable": "^4.0.0",
+    "babel": "^4.0.0",
     "deepmerge": "^0.2.7"
   }
 }
