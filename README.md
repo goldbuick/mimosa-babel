@@ -1,7 +1,7 @@
 mimosa-babel
 ===========
 
-This is a [babel](https://babeljs.org/) compiler module for the Mimosa build tool. It will compile your ES6 JavaScript to ES5 JavaScript.
+This is a [babel](https://babeljs.io/) compiler module for the Mimosa build tool. It will compile your ES6 JavaScript to ES5 JavaScript.
 
 For more information regarding Mimosa, see http://mimosa.io
 
@@ -11,7 +11,7 @@ Add `'babel'` to your list of modules.  That's all!  Mimosa will install the mod
 
 ## Functionality
 
-This module will process your `.js` files and compile them using [babel](https://babeljs.org/).  This module will not compile vendor JavaScript files.
+This module will process your `.js` files and compile them using [babel](https://babeljs.io/).  This module will not compile vendor JavaScript files.
 
 ## Default Config
 
@@ -49,4 +49,4 @@ You may want to use this module but may not want to use the version of babel tha
 The extension(s) of your ES6 JavaScript files.
 
 #### `options` object
-This is a pass through to the babel options object. For more details on how to configure babel, [check out the documentation](https://babeljs.org/docs/usage/options/).
+This is a pass through to the babel options object. For more details on how to configure babel, [check out the documentation](https://babeljs.io/docs/usage/options/).
