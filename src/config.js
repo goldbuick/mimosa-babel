@@ -27,7 +27,16 @@ export var defaults = () => { return {
       // If truthy, insert an explicit id for each defined AMD/System module.
       // By default, AMD/System modules are anonymous.
       // Default: false
-      moduleIds: false
+      moduleIds: false,
+
+      // Set the experimental proposal stage.
+      // Default: 2
+      stage: 2,
+
+      // Plugins. List of `require`-able modules that coresponds to babel plugins.
+      // Sample: ['foo-bar']
+      // Sample with order: ['foo-bar:before', 'bar-foo:after']
+      plugins: []
     }
   }
 }};
