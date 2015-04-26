@@ -8,14 +8,6 @@ export var defaults = () => { return {
 
     // Compiler options
     options: {
-      // List of transformers to EXCLUDE.
-      // Run `babel --help` to see a full list of transformers.
-      blacklist: [],
-
-      // List of transformers to ONLY use.
-      // Run `babel --help` to see a full list of transformers.
-      whitelist: [],
-
       // Module formatter to use
       // Run `babel --help` to see a full list of module formatters.
       // Default: 'common'
@@ -35,39 +27,7 @@ export var defaults = () => { return {
       // If truthy, insert an explicit id for each defined AMD/System module.
       // By default, AMD/System modules are anonymous.
       // Default: false
-      moduleIds: false,
-
-      // Enable support for experimental ES7 features
-      // Default: false
-      experimental: false,
-
-      format: {
-        // Output comments in generated output
-        // Defaults: true
-        comments: true,
-
-        // Do not include superfluous whitespace characters and line terminators
-        // Default: false
-        compact: false,
-
-        indent: {
-          // Preserve parentheses in new expressions that have no arguments
-          // Default: true
-          parentheses: true,
-
-          // Adjust the indentation of multiline comments to keep asterisks vertically aligned
-          // Default: true
-          adjustMultilineComment: true,
-
-          // Indent string
-          // Default: '  '
-          style: '  ',
-
-          // Base indent level
-          // Default: 0
-          base: 0
-        }
-      }
+      moduleIds: false
     }
   }
 }};
@@ -89,7 +49,7 @@ export function validate(config, validators) {
 
   // if user has not provided their own version, use local babel
   if ( !errors.length && !config.babel.lib ) {
-    config.babel.lib = require('babel');
+    config.babel.lib = require('babel-core');
   }
 
   return errors;
