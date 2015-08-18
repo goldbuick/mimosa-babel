@@ -36,6 +36,10 @@ function _compile(config, file, cb) {
         filename: file.inputFileName,
         ast: false
       });
+      
+      if (fOpts.plugins === null) {
+        fOpts.plugins = [];
+      }
 
       let result = localConfig.lib.transform(file.inputFileText, fOpts);
 
@@ -56,7 +60,7 @@ function _compile(config, file, cb) {
 
       cb(null, result.code, config, sourceMap);
     } catch (err) {
-      logger.error(`Error running es6 module transpiler on file [[ ${file.inputFileName} ]]`, err);
+      logger.error(`Error running babel on file [[ ${file.inputFileName} ]]`, err.stack);
       cb(err);
     }
   } else {
