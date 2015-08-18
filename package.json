@@ -1,6 +1,6 @@
 {
   "name": "mimosa-babel",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "babel mimosa files",
   "main": "./lib/index",
   "scripts": {
