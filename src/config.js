@@ -8,35 +8,6 @@ export var defaults = () => { return {
 
     // Compiler options
     options: {
-      // Module formatter to use
-      // Run `babel --help` to see a full list of module formatters.
-      // Default: 'common'
-      modules: 'common',
-
-      // If truthy, adds a `map` property to returned output.
-      // If set to 'inline', a comment with a sourceMappingURL directive is added to
-      // the bottom of the returned code.
-      // Default: true
-      sourceMap: true,
-
-      // Optional prefix for the AMD module formatter that will be prepend to the
-      // filename on module definitions
-      // Default: `sourceRoot` option.
-      moduleRoot: undefined,
-
-      // If truthy, insert an explicit id for each defined AMD/System module.
-      // By default, AMD/System modules are anonymous.
-      // Default: false
-      moduleIds: false,
-
-      // Set the experimental proposal stage.
-      // Default: 2
-      stage: 2,
-
-      // Plugins. List of `require`-able modules that coresponds to babel plugins.
-      // Sample: ['foo-bar']
-      // Sample with order: ['foo-bar:before', 'bar-foo:after']
-      plugins: []
     }
   }
 }};
