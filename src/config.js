@@ -1,13 +1,15 @@
 export var defaults = () => { return {
-  babel: {
+  babel6: {
   	// File extensions
-  	extensions: ['js', 'es6'],
+  	extensions: ['jsx'],
 
   	// Exclude files regex
     exclude: [],
 
     // Compiler options
     options: {
+      "plugins": [ "transform-es2015-modules-amd" ],
+      "presets": [ "react", "es2015" ]
     }
   }
 }};
@@ -15,21 +17,21 @@ export var defaults = () => { return {
 export function validate(config, validators) {
   let errors = [];
 
-  if (validators.ifExistsIsObject(errors, 'babel config', config.babel)) {
+  if (validators.ifExistsIsObject(errors, 'babel config', config.babel6)) {
 
-    if ( validators.isArrayOfStringsMustExist( errors, 'babel.extensions', config.babel.extensions ) ) {
-      if (config.babel.extensions.length === 0) {
+    if ( validators.isArrayOfStringsMustExist( errors, 'babel.extensions', config.babel6.extensions ) ) {
+      if (config.babel6.extensions.length === 0) {
         errors.push('babel.extensions cannot be an empty array');
       }
     }
 
-    validators.ifExistsIsObject(errors, 'babel.options', config.babel.options);
-    validators.ifExistsIsArray(errors, 'babel.exclude', config.babel.exclude);
+    validators.ifExistsIsObject(errors, 'babel.options', config.babel6.options);
+    validators.ifExistsIsArray(errors, 'babel.exclude', config.babel6.exclude);
   }
 
   // if user has not provided their own version, use local babel
-  if ( !errors.length && !config.babel.lib ) {
-    config.babel.lib = require('babel-core');
+  if ( !errors.length && !config.babel6.lib ) {
+    config.babel6.lib = require('babel-core');
   }
 
   return errors;

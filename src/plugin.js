@@ -85,10 +85,10 @@ function extend(object, ...args) {
 }
 
 export function extensions(conf) {
-  return conf.babel.extensions;
+  return conf.babel6.extensions;
 }
 
 export function compile(conf, file, cb) {
   logger = conf.log;
-  return _compile(conf.babel, file, cb);
+  return _compile(conf.babel6, file, cb);
 }
