@@ -9,7 +9,7 @@ export var defaults = () => { return {
     // Compiler options
     options: {
       "plugins": [ 
-        "syntax-class-properties",
+        "transform-class-properties",
         "transform-es2015-modules-amd" 
       ],
       "presets": [ "react", "es2015" ]
